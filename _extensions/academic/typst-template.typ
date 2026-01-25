@@ -1,4 +1,4 @@
-#import "@preview/fontawesome:0.5.0": *
+#import "@preview/fontawesome:0.6.0": *
 
 #let article(
   // Document metadata
@@ -8,6 +8,11 @@
   date: none,
   abstract: none,
   abstract-title: "ABSTRACT",
+  // PDF Metadata
+  title-meta: none,
+  author-meta: none,
+  keywords-meta: none,
+  date-meta: none,
   // Custom document metadata
   header: none,
   code-repo: none,
@@ -32,6 +37,12 @@
   cols: 1,
   doc,
 ) = {
+  set document(
+    title: title-meta,
+    author: author-meta,
+    keywords: keywords-meta,
+    date: date-meta,
+  )
   set page(
     paper: paper,
     margin: margin,

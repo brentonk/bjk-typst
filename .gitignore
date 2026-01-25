@@ -10,3 +10,4 @@ _site/
 docs/
 .vscode/
 .Renviron
+**/*.quarto_ipynb

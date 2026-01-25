@@ -2,6 +2,7 @@
 // Document metadata
 $if(title)$
   title: [$title$],
+  title-meta: "$title-meta$$if(title-meta)$$else$$title$$endif$",
 $endif$
 $if(subtitle)$
   subtitle: [$subtitle$],
@@ -18,6 +19,7 @@ $if(it.name.literal)$
 $endif$
 $endfor$
     ),
+  author-meta: ($for(by-author)$"$it.name.literal$"$sep$, $endfor$),
 $endif$
 $if(date)$
   date: [$date$],
@@ -37,6 +39,7 @@ $if(code-repo)$
 $endif$
 $if(keywords)$
   keywords: [$for(keywords)$$keywords$$sep$, $endfor$],
+  keywords-meta: ($for(keywords)$"$keywords$"$sep$, $endfor$),
 $endif$
 $if(custom-keywords)$
   custom-keywords: (

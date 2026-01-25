@@ -4,10 +4,10 @@ subtitle: A Minimalistic Quarto + Typst Template for Academic Writing
 header: Please click [HERE](https://kazuyanagimoto.com/quarto-academic-typst/template-full.pdf) for the latest version.
 author:
   - name: Kazuharu Yanagimoto
-    email: kazuharu.yanagimoto@cemfi.edu.es
+    email: yanagimoto@econ.kobe-u.ac.jp
     orcid: 0009-0007-1967-8304
     affiliations:
-      - name: CEMFI
+      - name: Kobe University
 abstract: |
   {{< lipsum 1 >}}
 thanks: |
