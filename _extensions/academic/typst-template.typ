@@ -35,7 +35,7 @@
   font: "libertinus serif",
   fontsize: 11pt,
   sansfont: "Jost*",
-  mathfont: "New Computer Modern Math",
+  mathfont: "Libertinus Math",
   link-color: rgb("#483d8b"),
   // Structure settings
   sectionnumbering: none,
@@ -65,7 +65,20 @@
   )
   show math.equation: set text(font: mathfont)
   set heading(numbering: sectionnumbering)
-  show heading: set text(font: sansfont, weight: "semibold")
+  show heading: it => {
+    set text(font: sansfont, weight: "semibold")
+    if it.numbering != none {
+      // LaTeX-style alignment: number + gap, with wrapped lines indented past the number
+      let num = counter(heading).display(it.numbering)
+      let gap = 0.75em
+      let num-width = measure(num).width + gap
+      pad(left: num-width, block(above: 1.2em, below: 0.6em)[
+        #h(-num-width)#num#h(gap)#it.body
+      ])
+    } else {
+      it
+    }
+  }
 
   show figure.caption: it => context [
     #set text(font: sansfont, size: 0.9em)
