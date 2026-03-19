@@ -5,7 +5,7 @@
   title: none,
   subtitle: none,
   authors: none,
-  date: none,
+  date: datetime.today().display("[month repr:long] [day], [year]"),
   abstract: none,
   abstract-title: "ABSTRACT",
   // PDF Metadata
