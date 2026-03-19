@@ -27,7 +27,7 @@
   region: "US",
   font: "libertinus serif",
   fontsize: 11pt,
-  sansfont: "Jost",
+  sansfont: "Jost*",
   mathfont: "New Computer Modern Math",
   link-color: rgb("#483d8b"),
   // Structure settings
