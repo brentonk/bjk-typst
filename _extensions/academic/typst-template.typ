@@ -4,7 +4,14 @@
   // Document metadata
   title: none,
   subtitle: none,
-  authors: none,
+  authors: (
+    (
+      name: "Brenton Kenkel",
+      affiliation: "Vanderbilt University",
+      email: "brenton.kenkel@vanderbilt.edu",
+      orcid: [0000-0001-5815-6292],
+    ),
+  ),
   date: datetime.today().display("[month repr:long] [day], [year]"),
   abstract: none,
   abstract-title: "ABSTRACT",
