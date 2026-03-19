@@ -1,0 +1,12 @@
+[package]
+name = "bjk-academic"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["Brenton Kenkel"]
+license = "MIT"
+description = "Academic article template for Typst"
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "img/thumbnail.png"

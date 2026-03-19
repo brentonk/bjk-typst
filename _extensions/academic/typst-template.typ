@@ -38,10 +38,10 @@
   doc,
 ) = {
   set document(
-    title: title-meta,
-    author: author-meta,
-    keywords: keywords-meta,
-    date: date-meta,
+    ..if title-meta != none { (title: title-meta) },
+    ..if author-meta != none { (author: author-meta) },
+    ..if keywords-meta != none { (keywords: keywords-meta) },
+    ..if date-meta != none { (date: date-meta) },
   )
   set page(
     paper: paper,
@@ -148,7 +148,8 @@
         } \
         #text(size: 0.85em, font: sansfont)[#author.affiliation] \
         #text(size: 0.7em, font: sansfont, fill: link-color)[
-          #link("mailto:" + author.email.children.map(email => email.text).join())[#author.email]
+          #let email-str = if type(author.email) == str { author.email } else { author.email.children.map(e => e.text).join() }
+          #link("mailto:" + email-str)[#author.email]
         ]
       ])
     )
@@ -195,6 +196,8 @@
   counter(heading).update(0)
   counter(figure.where(kind: "quarto-float-fig")).update(0)
   counter(figure.where(kind: "quarto-float-tbl")).update(0)
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: table)).update(0)
 
   // Figure & Table Numbering
   set figure(
