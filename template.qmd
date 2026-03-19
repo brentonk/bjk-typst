@@ -1,20 +1,17 @@
 ---
-title: Quarto Academic Typst
-subtitle: A minimalistic Quarto + Typst template for academic writing
+title: Template Title
+subtitle: A subtitle for the paper
 author:
-  - name: Kazuharu Yanagimoto
-    email: kazuharu.yanagimoto@cemfi.edu.es
-    orcid: 0009-0007-1967-8304
+  - name: Author Name
+    email: author@example.com
     affiliations:
-      - name: CEMFI
+      - name: University
 abstract: |
-  {{< lipsum 1 >}}
-thanks: |
-  You can write acknowledgements here.
+  This is a minimal example of the bjk-academic template rendered via Quarto.
+  It demonstrates math, R code with text output, and a figure.
 keywords:
-  - Quarto
-  - Typst
-  - format
+  - template
+  - example
 date: today
 date-format: full
 bibliography: references.bib
@@ -23,79 +20,48 @@ format:
     section-numbering: "1.1.1"
 execute:
   echo: false
+  warning: false
 ---
 
-This document shows a minimal example of the template.
-For more information, see the [full demo](https://kazuyanagimoto.com/quarto-academic-typst/template-full.pdf) and its [source](https://kazuyanagimoto.com/quarto-academic-typst/template-full.qmd).
+# Introduction
 
-# Section as Heading Level 1
-
-Section numbering can be specified in the YAML `section-numbering` field
-as other Typst templates.
-
-## Subsection as Heading Level 2
-
-You can use LaTeX math expressions:
+This template supports LaTeX math. For example, a linear regression model:
 
 $$
-Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \tau_h \mathbb{1}\{E_i + k = t\} +
-\varepsilon_{it}.
+Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i, \qquad \varepsilon_i \sim \mathcal{N}(0, \sigma^2).
 $$
 
-### Subsubsection as Heading Level 3
+# Analysis
 
-I don't use and don't recommend using heading levels 3 and below but it works.
-
-## Citation
-
-You can cite a reference like this [@katsushika1831] or @horst2020.
-Typst has some built-in citation styles. Check the [Typst documentation](https://typst.app/docs/reference/model/bibliography/#parameters-style) for more information.
-
-# Figures and Tables
-
-## Figures
-
-As @fig-hist-mpg shows, the caption is displayed below the figure.
-As a caption of the figure (`fig-cap`), I use bold text for the title and use a normal text for the description.
+We fit a simple linear model of fuel efficiency on vehicle weight using the `mtcars` dataset.
 
 ```{r}
-#| label: fig-hist-mpg
-#| fig-cap: "**Histogram of Miles per Gallon**. The x-axis shows the miles per gallon, and the y-axis shows the frequency."
-
-hist(mtcars$mpg)
+#| echo: true
+fit <- lm(mpg ~ wt, data = mtcars)
+summary(fit)
 ```
 
-## Tables
-
-You can use [tinytable](https://vincentarelbundock.github.io/tinytable/)
-for general tables and [modelsummary](https://vincentarelbundock.github.io/modelsummary/) for regression tables.^[Since the default backend of `modelsummary` is `tinytable`, you can use the customization options of `tinytable` for `modelsummary`.]
-As @tbl-mtcars-head shows, the caption is displayed above the table.
-The notes of the table can be added using the `notes` argument of the `tinytable::tt()` function.
+As @fig-mpg-wt shows, heavier cars tend to have lower fuel efficiency.
 
 ```{r}
-#| label: tbl-mtcars-head
-#| tbl-cap: Head of the mtcars Dataset
+#| label: fig-mpg-wt
+#| fig-cap: |
+#|   **Fuel efficiency vs. vehicle weight**.
+#|   Points show individual cars from the mtcars dataset.
+#|   The blue line is a linear fit with a 95% confidence band.
+#| fig-width: 5
+#| fig-height: 3.5
 
-nt <- "_Notes_: This table shows the first six rows of the mtcars dataset."
-mtcars[1:5, 1:5] |>
-  tinytable::tt(width = 0.8, notes = nt)         
-```
-# Last words
+library(ggplot2)
+library(cowplot)
 
-I made this template for my working papers, so it may not be suitable for other fields than economics.
-I am happy to receive feedback and suggestions for improvement.
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "steelblue") +
+  labs(x = "Weight (1000 lbs)", y = "Miles per Gallon") +
+  theme_cowplot()
 
-{{< appendix >}}
-
-# Supplemental Figures
-
-The figure numbering will be reset to "A.1", "A.2", etc so that it is clear that these figures are part of the appendix.
-
-```{r}
-#| label: fig-scatter-car
-#| fig-cap: "**Scatter Plot of Car Data**. The x-axis shows the weight of the car, and the y-axis shows the miles per gallon."
-
-plot(mtcars$wt, mtcars$mpg)
+p
 ```
 
 {{< pagebreak >}}
