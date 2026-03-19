@@ -33,7 +33,7 @@
   lang: "en",
   region: "US",
   font: "libertinus serif",
-  fontsize: 11pt,
+  fontsize: 12pt,
   sansfont: "Jost*",
   mathfont: "Libertinus Math",
   link-color: rgb("#483d8b"),
