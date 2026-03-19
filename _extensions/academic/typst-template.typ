@@ -140,7 +140,7 @@
   }
 
   if title != none {
-    align(left)[#block(spacing: 4em)[
+    align(left)[#block(above: 4em, below: 2em)[
         #text(weight: "semibold", size: 1.5em, font: sansfont)[
           #title
           #if thanks != none {
@@ -177,6 +177,7 @@
   }
 
   if abstract != none {
+    v(2em)
     block(inset: 2em)[
       #text(weight: "semibold", font: sansfont, size: 0.9em)[#abstract-title] #h(0.5em)
       #text(font: sansfont)[#abstract]
