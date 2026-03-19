@@ -22,13 +22,14 @@ If the local package symlink is set up (see [Setup](#setup)), import from any `.
   date: "2026",
   abstract: [Abstract text here.],
   sectionnumbering: "1.1.1",
+  titlepage: true,
 )
 ```
 
 Compile with `--font-path` to use the bundled fonts:
 
 ```bash
-typst compile my-paper.typ --font-path /path/to/bjk-typst/static/fonts
+typst compile my-paper.typ --root . --font-path /path/to/bjk-typst/static/fonts
 ```
 
 See `template/main.typ` for a complete working example.
@@ -41,7 +42,7 @@ Install the extension into a Quarto project:
 quarto install extension brentonk/bjk-typst
 ```
 
-Then use `format: academic-typst` in your `.qmd` front matter. See `template.qmd` for a minimal example and `template-full.qmd` for all options.
+Then use `format: academic-typst` in your `.qmd` front matter. See `template.qmd` for a minimal example.
 
 ## Setup
 
@@ -67,13 +68,14 @@ All styling lives in a single file: `_extensions/academic/typst-template.typ`. T
 | Parameter | Default | Description |
 |-----------|---------|-------------|
 | `font` | `"libertinus serif"` | Body font |
-| `sansfont` | `"libertinus sans"` | Heading font |
+| `sansfont` | `"Jost"` | Heading/UI font |
 | `mathfont` | `"New Computer Modern Math"` | Math font |
 | `fontsize` | `11pt` | Base font size |
 | `link-color` | `rgb("#483d8b")` | Link/reference color |
 | `margin` | `(x: 1.25in, y: 1.25in)` | Page margins |
 | `paper` | `"us-letter"` | Paper size |
 | `sectionnumbering` | `none` | Section numbering format (e.g. `"1.1.1"`) |
+| `titlepage` | `false` | Separate title page with content starting on page 1 |
 | `cols` | `1` | Number of columns |
 
 ### Quarto-only files
@@ -82,12 +84,22 @@ All styling lives in a single file: `_extensions/academic/typst-template.typ`. T
 - `shortcodes.lua` — provides `{{< appendix >}}` shortcode
 - `_extension.yml` — Quarto extension metadata
 
+## Building examples
+
+```bash
+make          # build both examples
+make typst    # standalone Typst only
+make quarto   # Quarto only
+make clean    # remove generated PDFs
+```
+
 ## Repo structure
 
 ```
 bjk-typst/
 ├── lib.typ                          # Typst package entrypoint (re-exports from extension)
 ├── typst.toml                       # Typst package manifest
+├── Makefile                         # Build example PDFs
 ├── template/
 │   └── main.typ                     # Standalone Typst starter template
 ├── _extensions/academic/
@@ -96,8 +108,7 @@ bjk-typst/
 │   ├── shortcodes.lua               # Quarto shortcodes
 │   └── _extension.yml               # Quarto extension metadata
 ├── static/fonts/                    # Bundled fonts (Jost, Libertinus)
-├── template.qmd                     # Quarto minimal example
-├── template-full.qmd                # Quarto full example
+├── template.qmd                     # Quarto example
 └── references.bib                   # Example bibliography
 ```
 

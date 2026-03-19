@@ -27,12 +27,13 @@
   region: "US",
   font: "libertinus serif",
   fontsize: 11pt,
-  sansfont: "libertinus sans",
+  sansfont: "Jost",
   mathfont: "New Computer Modern Math",
   link-color: rgb("#483d8b"),
   // Structure settings
   sectionnumbering: none,
   pagenumbering: "1",
+  titlepage: false,
   toc: false,
   cols: 1,
   doc,
@@ -46,7 +47,7 @@
   set page(
     paper: paper,
     margin: margin,
-    numbering: pagenumbering,
+    numbering: if titlepage { none } else { pagenumbering },
   )
   set par(justify: true)
   set text(
@@ -131,7 +132,7 @@
         ]
       ]]
   }
-  
+
   if authors != none {
     let count = authors.len()
     let ncols = calc.min(count, 3)
@@ -160,7 +161,8 @@
       #text(weight: "semibold", font: sansfont, size: 0.9em)[#abstract-title] #h(0.5em)
       #text(font: sansfont)[#abstract]
       #if keywords != none {
-        text(weight: "semibold", font: sansfont, size: 0.9em)[\ Keywords:]
+        parbreak()
+        text(weight: "semibold", font: sansfont, size: 0.9em)[Keywords:]
         h(0.5em)
         text(font: sansfont)[#keywords]
       }
@@ -183,7 +185,16 @@
     ]
   }
 
-  if cols == 1 {
+  if titlepage {
+    pagebreak()
+    counter(page).update(1)
+    set page(numbering: pagenumbering)
+    if cols == 1 {
+      doc
+    } else {
+      columns(cols, doc)
+    }
+  } else if cols == 1 {
     doc
   } else {
     columns(cols, doc)

@@ -11,6 +11,8 @@
 
 #show: article.with(
   title: "Paper Title",
+  subtitle: "A subtitle for the paper",
+  thanks: [The author thanks someone for helpful comments.],
   authors: (
     (
       name: "Author Name",
@@ -25,6 +27,7 @@
   ],
   keywords: [keyword one, keyword two],
   sectionnumbering: "1.1.1",
+  titlepage: true,
 )
 
 = Introduction

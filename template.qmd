@@ -6,6 +6,8 @@ author:
     email: author@example.com
     affiliations:
       - name: University
+thanks: |
+  The author thanks someone for helpful comments.
 abstract: |
   This is a minimal example of the bjk-academic template rendered via Quarto.
   It demonstrates math, R code with text output, and a figure.
@@ -13,11 +15,13 @@ keywords:
   - template
   - example
 date: today
-date-format: full
+date-format: long
 bibliography: references.bib
 format:
   academic-typst:
     section-numbering: "1.1.1"
+    titlepage: true
+    font-paths: ["static/fonts"]
 execute:
   echo: false
   warning: false

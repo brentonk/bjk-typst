@@ -94,6 +94,9 @@ $endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$
+$if(titlepage)$
+  titlepage: $titlepage$,
+$endif$
 $if(toc)$
   toc: $toc$,
 $endif$

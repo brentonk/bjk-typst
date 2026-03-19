@@ -21,12 +21,13 @@ All styling is defined in `_extensions/academic/typst-template.typ` (the `articl
 ## Building
 
 ```bash
-# Standalone Typst
-typst compile template/main.typ --root . --font-path static/fonts
-
-# Quarto (requires R packages via renv)
-quarto render template.qmd
+make          # build both examples
+make typst    # standalone Typst only
+make quarto   # Quarto only
+make clean    # remove generated PDFs
 ```
+
+Output goes to `template/example_typst.pdf` and `template/example_quarto.pdf`.
 
 ## Local package symlink
 
@@ -34,3 +35,7 @@ The repo is symlinked as a local Typst package at:
 `~/.local/share/typst/packages/local/bjk-academic/0.1.0/`
 
 Bump the version in `typst.toml` and the symlink directory name together.
+
+## Pre-commit checklist
+
+Before committing, review CLAUDE.md and README.md to ensure they reflect any changes made (new parameters, changed defaults, structural changes, etc.).
