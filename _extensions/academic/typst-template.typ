@@ -223,7 +223,7 @@
   }
 }
 
-#let appendix(content) = {
+#let appendix(sansfont: "Jost*", newpage: true, reset-page-numbering: true, content) = {
   // Reset Numbering
   set heading(numbering: "A.1.1")
   counter(heading).update(0)
@@ -240,7 +240,12 @@
   )
 
   // Appendix Start
-  pagebreak(weak: true)
-  text(size: 2em)[Appendix]
+  if newpage {
+    pagebreak(weak: true)
+    if reset-page-numbering {
+      counter(page).update(1)
+    }
+  }
+  text(size: 2em, font: sansfont, weight: "semibold")[Appendix]
   content
 }
