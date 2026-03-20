@@ -225,7 +225,7 @@
 
 #let appendix(sansfont: "Jost*", newpage: true, reset-page-numbering: true, content) = {
   // Reset Numbering
-  set heading(numbering: "A.1.1")
+  set heading(numbering: "A.1.1", supplement: [Appendix])
   counter(heading).update(0)
   counter(figure.where(kind: "quarto-float-fig")).update(0)
   counter(figure.where(kind: "quarto-float-tbl")).update(0)
