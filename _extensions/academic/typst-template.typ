@@ -145,6 +145,7 @@
           #title
           #if thanks != none {
             footnote(numbering: "*", thanks)
+            counter(footnote).update(0)
           }\
           #if subtitle != none {
             text(weight: "regular", style: "italic", size: 0.8em)[#subtitle]
