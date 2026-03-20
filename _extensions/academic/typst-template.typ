@@ -56,7 +56,7 @@
     margin: margin,
     numbering: if titlepage { none } else { pagenumbering },
   )
-  set par(justify: true)
+  set par(justify: true, leading: 0.7em)
   set text(
     lang: lang,
     region: region,
