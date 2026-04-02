@@ -105,8 +105,8 @@
           ..counter(eq).at(el.location()),
         )
       ]
-    } else if el.func() == figure {
-      el.supplement.text
+    } else if el.func() == figure and type(el.kind) != str {
+      el.supplement
       link(el.location())[
         #set text(fill: link-color)
         #numbering(el.numbering, ..el.counter.at(el.location()))
