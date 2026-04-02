@@ -12,7 +12,7 @@
       orcid: [0000-0001-5815-6292],
     ),
   ),
-  date: datetime.today().display("[month repr:long] [day], [year]"),
+  date: datetime.today().display("[month repr:long] [day padding:none], [year]"),
   abstract: none,
   abstract-title: "ABSTRACT",
   // PDF Metadata
