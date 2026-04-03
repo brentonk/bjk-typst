@@ -99,12 +99,8 @@
     if el == none {
       it
     } else if el.func() == eq {
-      link(el.location())[
-        #numbering(
-          el.numbering,
-          ..counter(eq).at(el.location()),
-        )
-      ]
+      set text(fill: link-color)
+      it
     } else if el.func() == figure and type(el.kind) != str {
       el.supplement
       link(el.location())[
