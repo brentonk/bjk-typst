@@ -66,7 +66,7 @@
   show math.equation: set text(font: mathfont)
   set heading(numbering: sectionnumbering)
   show heading: it => {
-    set text(font: sansfont, weight: "semibold")
+    set text(font: sansfont, weight: "bold")
     if it.numbering != none {
       // LaTeX-style alignment: number + gap, with wrapped lines indented past the number
       let num = counter(heading).display(it.numbering)
@@ -84,10 +84,10 @@
     #set text(font: sansfont, size: 0.9em)
     #if it.supplement == [Figure] {
       set align(left)
-      text(weight: "semibold")[#it.supplement #it.counter.display(it.numbering): ]
+      text(weight: "bold")[#it.supplement #it.counter.display(it.numbering): ]
       it.body
     } else {
-      text(weight: "semibold")[#it.supplement #it.counter.display(it.numbering): ]
+      text(weight: "bold")[#it.supplement #it.counter.display(it.numbering): ]
       it.body
     }
 
@@ -121,7 +121,7 @@
 
   if date != none {
     align(left)[#block()[
-        #text(weight: "semibold", font: sansfont, size: 0.8em)[
+        #text(weight: "bold", font: sansfont, size: 0.8em)[
           #date
           #if header != none {
             h(3em)
@@ -141,7 +141,7 @@
 
   if title != none {
     align(left)[#block(above: 4em, below: 2em)[
-        #text(weight: "semibold", size: 1.5em, font: sansfont)[
+        #text(weight: "bold", size: 1.5em, font: sansfont)[
           #title
           #if thanks != none {
             footnote(numbering: "*", thanks)
@@ -180,17 +180,17 @@
   if abstract != none {
     v(2em)
     block(inset: 2em)[
-      #text(weight: "semibold", font: sansfont, size: 0.9em)[#abstract-title] #h(0.5em)
+      #text(weight: "bold", font: sansfont, size: 0.9em)[#abstract-title] #h(0.5em)
       #text(font: sansfont)[#abstract]
       #if keywords != none {
         parbreak()
-        text(weight: "semibold", font: sansfont, size: 0.9em)[Keywords:]
+        text(weight: "bold", font: sansfont, size: 0.9em)[Keywords:]
         h(0.5em)
         text(font: sansfont)[#keywords]
       }
       #if custom-keywords != none {
         for it in custom-keywords {
-          text(weight: "semibold", font: sansfont, size: 0.9em)[\ #it.name:]
+          text(weight: "bold", font: sansfont, size: 0.9em)[\ #it.name:]
           h(0.5em)
           text(font: sansfont)[#it.values]
         }
@@ -246,6 +246,6 @@
       counter(page).update(1)
     }
   }
-  text(size: 2em, font: sansfont, weight: "semibold")[Appendix]
+  text(size: 2em, font: sansfont, weight: "bold")[Appendix]
   content
 }
