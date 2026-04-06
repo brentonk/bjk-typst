@@ -72,7 +72,7 @@
       let num = counter(heading).display(it.numbering)
       let gap = 0.75em
       let num-width = measure(num).width + gap
-      pad(left: num-width, block(above: 1.2em, below: 0.6em)[
+      block(above: 1.2em, below: 0.9em, pad(left: num-width)[
         #h(-num-width)#num#h(gap)#it.body
       ])
     } else {
