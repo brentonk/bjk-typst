@@ -80,7 +80,7 @@
     }
   }
 
-  show figure.caption: it => context [
+  show figure.caption: it => context align(center, block(width: 90%)[
     #set text(font: sansfont, size: 0.9em)
     #if it.supplement == [Figure] {
       set align(left)
@@ -90,8 +90,7 @@
       text(weight: "bold")[#it.supplement #it.counter.display(it.numbering): ]
       it.body
     }
-
-  ]
+  ])
 
   show ref: it => {
     let eq = math.equation
