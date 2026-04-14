@@ -34,7 +34,7 @@
   region: "US",
   font: "libertinus serif",
   fontsize: 12pt,
-  sansfont: "Jost*",
+  sansfont: "Fira Sans",
   mathfont: "Libertinus Math",
   link-color: rgb("#483d8b"),
   // Structure settings
@@ -218,7 +218,7 @@
   }
 }
 
-#let appendix(sansfont: "Jost*", newpage: true, reset-page-numbering: true, content) = {
+#let appendix(sansfont: "Fira Sans", newpage: true, reset-page-numbering: true, content) = {
   // Reset Numbering
   set heading(numbering: "A.1.1", supplement: [Appendix])
   counter(heading).update(0)

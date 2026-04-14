@@ -68,7 +68,7 @@ All styling lives in a single file: `_extensions/academic/typst-template.typ`. T
 | Parameter | Default | Description |
 |-----------|---------|-------------|
 | `font` | `"libertinus serif"` | Body font |
-| `sansfont` | `"Jost"` | Heading/UI font |
+| `sansfont` | `"Fira Sans"` | Heading/UI font |
 | `mathfont` | `"New Computer Modern Math"` | Math font |
 | `fontsize` | `11pt` | Base font size |
 | `link-color` | `rgb("#483d8b")` | Link/reference color |
@@ -107,7 +107,7 @@ bjk-typst/
 │   ├── typst-show.typ               # Quarto YAML → article() bridge
 │   ├── shortcodes.lua               # Quarto shortcodes
 │   └── _extension.yml               # Quarto extension metadata
-├── static/fonts/                    # Bundled fonts (Jost, Libertinus)
+├── static/fonts/                    # Bundled fonts (Fira Sans, Libertinus)
 ├── template.qmd                     # Quarto example
 └── references.bib                   # Example bibliography
 ```
