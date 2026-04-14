@@ -81,7 +81,7 @@
   }
 
   show figure.caption: it => context align(center, block(width: 90%)[
-    #set text(font: sansfont, size: 0.9em)
+    #set text(font: sansfont, size: 0.8em)
     #if it.supplement == [Figure] {
       set align(left)
       text(weight: "bold")[#it.supplement #it.counter.display(it.numbering): ]
@@ -175,6 +175,7 @@
   if abstract != none {
     v(2em)
     block(inset: 2em)[
+      #set text(size: 0.9em)
       #text(weight: "bold", font: sansfont, size: 0.9em)[#abstract-title] #h(0.5em)
       #text(font: sansfont)[#abstract]
       #if keywords != none {
