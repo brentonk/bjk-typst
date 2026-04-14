@@ -82,6 +82,7 @@
 
   show figure.caption: it => context align(center, block(width: 90%)[
     #set text(font: sansfont, size: 0.8em)
+    #show math.equation: set text(size: 1.15em)
     #if it.supplement == [Figure] {
       set align(left)
       text(weight: "bold")[#it.supplement #it.counter.display(it.numbering): ]
@@ -91,6 +92,11 @@
       it.body
     }
   ])
+
+  show footnote.entry: it => {
+    show math.equation.where(block: true): set block(above: 0.7em, below: 0.7em)
+    it
+  }
 
   show ref: it => {
     let eq = math.equation
