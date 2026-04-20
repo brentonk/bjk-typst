@@ -80,7 +80,7 @@
     }
   }
 
-  show figure.caption: it => context align(center, block(width: 90%)[
+  show figure.caption: it => context align(center, block(width: 90%, inset: (bottom: 0.6em))[
     #set text(font: sansfont, size: 0.8em)
     #show math.equation: set text(size: 1.15em)
     #if it.supplement == [Figure] {
