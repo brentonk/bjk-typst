@@ -133,7 +133,7 @@
   }
 
   show link: set text(fill: link-color)
-  set bibliography(title: "References")
+  set bibliography(title: "References", style: "chicago-author-date")
 
   if date != none {
     align(left)[#block()[
