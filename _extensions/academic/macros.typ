@@ -17,7 +17,15 @@
 // Text macros
 #let def(term) = text(fill: eastern, term)
 #let citet(key) = cite(key, form: "prose")
-#let note(it) = [#highlight[\[#it\]]]
+#let note-color = rgb("#fffd11a1")
+#let note(it) = {
+  show math.equation.where(block: false): e => box(
+    fill: note-color,
+    outset: (top: 0.15em, bottom: 0.25em),
+    e,
+  )
+  highlight(fill: note-color)[\[#it\]]
+}
 #let paragraph(title) = {
   v(0.5em)
   text(font: "Fira Sans", strong(title))
