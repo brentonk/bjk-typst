@@ -40,7 +40,8 @@
 
 = Introduction
 
-#lorem(40) We #def[define] technical terms using the `def` macro.
+#lorem(40) We #def[define] technical terms using the `def` macro,
+following #citet(<horst2020>) and the parenthetical form @katsushika1831.
 #note[A draft note that's easy to spot.]
 
 = Setup
@@ -87,6 +88,8 @@ vector.
 
 #paragraph[Discussion.]
 #lorem(40)
+
+#bibliography("/references.bib")
 
 #show: appendix
 #set-theorion-numbering("A.1")

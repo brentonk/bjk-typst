@@ -91,7 +91,7 @@
         #h(-num-width)#num#h(gap)#it.body
       ])
     } else {
-      it
+      block(above: 1.2em, below: 0.9em, it.body)
     }
   }
 

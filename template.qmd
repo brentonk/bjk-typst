@@ -85,7 +85,7 @@ $ deriv(Y, X) quad pderiv(Y, X_i) $
 
 # Analysis
 
-We fit a simple linear model of fuel efficiency on vehicle weight using the `mtcars` dataset.
+We fit a simple linear model of fuel efficiency on vehicle weight using the `mtcars` dataset, following @horst2020 and others [@katsushika1831].
 
 ```{r}
 #| echo: true
