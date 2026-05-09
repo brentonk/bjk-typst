@@ -1,4 +1,5 @@
 #import "@preview/fontawesome:0.6.0": *
+#import "/_extensions/academic/macros.typ": *
 
 #let article(
   // Document metadata
@@ -56,7 +57,7 @@
     margin: margin,
     numbering: if titlepage { none } else { pagenumbering },
   )
-  set par(justify: true, leading: 0.7em)
+  set par(justify: true, leading: 0.9em, spacing: 1.6em)
   set text(
     lang: lang,
     region: region,
@@ -64,6 +65,20 @@
     size: fontsize,
   )
   show math.equation: set text(font: mathfont)
+
+  // Equation numbering: only labelled block equations get a number
+  set math.equation(numbering: "(1)", supplement: [Equation])
+  show math.equation: set block(breakable: true)
+  show math.equation.where(block: true, numbering: "(1)"): it => {
+    if not it.has("label") {
+      counter(math.equation).update(v => v - 1)
+      math.equation(block: true, numbering: none, it.body)
+    } else { it }
+  }
+
+  // Theorion theorem rendering + numbering depth (e.g., 1.2 = section 1, 2nd theorem)
+  show: show-theorion
+  set-inherited-levels(1)
   set heading(numbering: sectionnumbering)
   show heading: it => {
     set text(font: sansfont, weight: "bold")

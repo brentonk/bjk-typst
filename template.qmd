@@ -10,7 +10,7 @@ thanks: |
   The author thanks someone for helpful comments.
 abstract: |
   This is a minimal example of the bjk-academic template rendered via Quarto.
-  It demonstrates math, R code with text output, and a figure.
+  It demonstrates math, R code, theorem environments, and the bundled macros.
 keywords:
   - template
   - example
@@ -33,7 +33,55 @@ This template supports LaTeX math. For example, a linear regression model:
 
 $$
 Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i, \qquad \varepsilon_i \sim \mathcal{N}(0, \sigma^2).
+$$ {#eq-regression}
+
+An unlabelled display equation is not numbered:
+
 $$
+\sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2.
+$$
+
+We refer to @eq-regression. The `def` macro highlights a defined term:
+```{=typst}
+#def[regression].
+```
+The draft `note` macro flags work in progress:
+```{=typst}
+#note[a note to self].
+```
+
+# Setup
+
+```{=typst}
+#assumption(title: "Regularity")[
+  The errors $epsilon_i$ are independent with mean zero and finite variance.
+] <assm-regularity>
+
+#lemma(title: "Consistency")[
+  Under @assm-regularity, the OLS estimator $hat(beta)$ is consistent.
+] <res-consistency>
+
+#proof[
+  Standard Cauchy--Schwarz argument. #qedhere
+]
+
+#proposition[
+  The OLS estimator achieves the Cramér--Rao bound under Gaussian errors.
+] <res-efficiency>
+
+#corollary[
+  No unbiased estimator has smaller variance than #mathbf[hat(beta)].
+]
+```
+
+```{=typst}
+#paragraph[Discussion.]
+```
+The macro `deriv` produces a derivative: `#deriv($Y$, $X$)`. The partial form
+is `#pderiv($Y$, $X_i$)`. Both render with the standard fraction style:
+```{=typst}
+$ deriv(Y, X) quad pderiv(Y, X_i) $
+```
 
 # Analysis
 
@@ -69,4 +117,17 @@ p
 ```
 
 {{< pagebreak >}}
+
+{{< appendix >}}
+
+# Restated lemma
+
+```{=typst}
+#theorion-restate(filter: <res-consistency>)
+
+#proof[
+  See textbook derivation.
+]
+```
+
 <!-- Bibliography -->

@@ -5,9 +5,15 @@
 //
 // Usage as a local package (after symlinking into
 // ~/.local/share/typst/packages/local/bjk-academic/0.1.0/):
-//   #import "@local/bjk-academic:0.1.0": article, appendix
+//   #import "@local/bjk-academic:0.1.0": article, appendix, lemma, ...
 
-#import "../lib.typ": article, appendix
+#import "../lib.typ": (
+  article, appendix,
+  lemma, proposition, corollary, assumption,
+  proof, qedhere, theorion-restate, set-theorion-numbering,
+  deriv, pderiv, mathbf, moveeqleft,
+  def, note, paragraph, citet,
+)
 
 #show: article.with(
   title: "Paper Title",
@@ -24,6 +30,8 @@
   date: "2026",
   abstract: [
     This is an example abstract for the standalone Typst template.
+    It exercises the math macros (#deriv($f$, $x$)), the theorem environments,
+    and the equation-numbering convention.
   ],
   keywords: [keyword one, keyword two],
   sectionnumbering: "1.1.1",
@@ -32,22 +40,61 @@
 
 = Introduction
 
-#lorem(80)
+#lorem(40) We #def[define] technical terms using the `def` macro.
+#note[A draft note that's easy to spot.]
 
-= Methods
+= Setup
 
-#lorem(100)
+#assumption(title: "Regularity")[
+  The function $f : RR -> RR$ is twice continuously differentiable and
+  strictly concave.
+] <assm-regularity>
 
-== Subsection
+Under @assm-regularity, the first-order condition has a unique solution.
 
-#lorem(60)
+== Notation
+
+A labelled display equation is numbered:
+$
+deriv(f, x) = 0
+$ <eq-foc>
+
+An unlabelled equation is not:
+$
+pderiv(f, x_i) + pderiv(f, x_j) = 0.
+$
+
+We refer to @eq-foc when needed. The macro #mathbf[v] produces an upright bold
+vector.
 
 = Results
 
-#lorem(80)
+#lemma(title: "Monotonicity")[
+  If $f$ is strictly concave, then $f'$ is strictly decreasing.
+] <res-monotone>
+
+#proof[
+  Differentiate twice and use the assumption. #qedhere
+]
+
+#proposition(title: "Main result")[
+  The optimum exists and is unique.
+] <res-main>
+
+#corollary[
+  Comparative statics on the optimum follow from the implicit function theorem.
+]
+
+#paragraph[Discussion.]
+#lorem(40)
 
 #show: appendix
+#set-theorion-numbering("A.1")
 
-= Additional Details
+= Proof of @res-main <sec-proof>
 
-#lorem(60)
+#theorion-restate(filter: <res-main>)
+
+#proof[
+  By @res-monotone and the intermediate value theorem.
+]
