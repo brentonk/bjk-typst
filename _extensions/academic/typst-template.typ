@@ -157,6 +157,7 @@
 
   if title != none {
     align(left)[#block(above: 4em, below: 2em)[
+        #set par(leading: 0.5em, justify: false)
         #text(weight: "bold", size: 1.5em, font: sansfont)[
           #title
           #if thanks != none {
