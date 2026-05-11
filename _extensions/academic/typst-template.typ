@@ -122,11 +122,7 @@
       set text(fill: link-color)
       it
     } else if el.func() == figure and type(el.kind) != str {
-      el.supplement
-      link(el.location())[
-        #set text(fill: link-color)
-        #numbering(el.numbering, ..el.counter.at(el.location()))
-      ]
+      [#el.supplement~#link(el.location(), text(fill: link-color, numbering(el.numbering, ..el.counter.at(el.location()))))]
     } else {
       it
     }
