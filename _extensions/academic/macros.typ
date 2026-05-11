@@ -16,7 +16,13 @@
 
 // Text macros
 #let def(term) = text(fill: eastern, term)
-#let citet(key) = cite(key, form: "prose")
+#let citet(key, supplement: none) = cite(key, form: "prose", supplement: supplement)
+#let citepp(prefix: none, ..keys) = {
+  "("
+  if prefix != none [#prefix ]
+  keys.pos().map(k => [#cite(k, form: "author")#h(0pt) #cite(k, form: "year")]).join("; ")
+  ")"
+}
 #let note-color = rgb("#fffd11a1")
 #let note(it) = {
   show math.equation.where(block: false): e => box(
