@@ -13,14 +13,16 @@
 #let pderiv(num, denom, style: "vertical") = $frac(partial num, partial denom, style: style)$
 #let mathbf(it) = math.upright(math.bold(it))
 #let moveeqleft = math.class("normal", h(-2em))
+#let indicator(cond) = $bb(1) lr({cond})$
 
 // Text macros
 #let def(term) = text(fill: eastern, term)
-#let citet(key, supplement: none) = cite(key, form: "prose", supplement: supplement)
-#let citepp(prefix: none, ..keys) = {
+#let citet(key, suffix: none) = cite(key, form: "prose", supplement: suffix)
+#let citepp(prefix: none, suffix: none, ..keys) = {
   "("
   if prefix != none [#prefix ]
   keys.pos().map(k => [#cite(k, form: "author")#h(0pt) #cite(k, form: "year")]).join("; ")
+  if suffix != none [, #suffix]
   ")"
 }
 #let note-color = rgb("#fffd11a1")
