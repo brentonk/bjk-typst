@@ -11,7 +11,7 @@
   article, appendix,
   lemma, proposition, corollary, assumption,
   proof, qedhere, theorion-restate, set-theorion-numbering,
-  deriv, pderiv, mathbf, moveeqleft,
+  deriv, pderiv, mathbf, moveeqleft, indicator,
   def, note, paragraph, citet,
 )
 
@@ -64,6 +64,9 @@ An unlabelled equation is not:
 $
 pderiv(f, x_i) + pderiv(f, x_j) = 0.
 $
+
+Expectations of indicator functions give probabilities:
+$ EE[indicator(X <= t)] = Pr(X <= t). $
 
 We refer to @eq-foc when needed. The macro #mathbf[v] produces an upright bold
 vector.
