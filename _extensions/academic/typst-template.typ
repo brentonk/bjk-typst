@@ -1,5 +1,5 @@
 #import "@preview/fontawesome:0.6.0": *
-#import "/_extensions/academic/macros.typ": *
+#import "macros.typ": *
 
 #let article(
   // Document metadata
