@@ -16,7 +16,7 @@
 #let indicator(cond) = $bb(1) lr({cond})$
 
 // Text macros
-#let def(term) = text(fill: eastern, term)
+#let def(term) = text(fill: olive, term)
 #let citet(key, suffix: none) = cite(key, form: "prose", supplement: suffix)
 #let citepp(prefix: none, suffix: none, ..keys) = {
   "("
@@ -45,6 +45,7 @@
   #text(font: "Fira Sans", size: 0.9em)[#prefix.#if title != "" and title != [] [#text(weight: 100)[ (#title.)]]]
 ]
 #let assumption  = assumption.with(get-full-title: bjk-thm-title)
+#let definition  = definition.with(get-full-title: bjk-thm-title)
 #let lemma       = lemma.with(get-full-title: bjk-thm-title)
 #let proposition = proposition.with(get-full-title: bjk-thm-title)
 #let (_, _, corollary, _) = make-frame(

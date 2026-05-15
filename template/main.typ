@@ -9,7 +9,7 @@
 
 #import "../lib.typ": (
   article, appendix,
-  lemma, proposition, corollary, assumption,
+  lemma, proposition, corollary, assumption, definition,
   proof, qedhere, theorion-restate, set-theorion-numbering,
   deriv, pderiv, mathbf, moveeqleft, indicator,
   def, note, paragraph, citet,
@@ -46,12 +46,17 @@ following #citet(<horst2020>) and the parenthetical form @katsushika1831.
 
 = Setup
 
+#definition(title: "Interior maximizer")[
+  An interior maximizer of $f$ is a point $x^* in RR$ with $f'(x^*) = 0$.
+] <def-maximizer>
+
 #assumption(title: "Regularity")[
   The function $f : RR -> RR$ is twice continuously differentiable and
   strictly concave.
 ] <assm-regularity>
 
-Under @assm-regularity, the first-order condition has a unique solution.
+Under @assm-regularity, an interior maximizer in the sense of @def-maximizer
+is unique.
 
 == Notation
 

@@ -53,6 +53,10 @@ The draft `note` macro flags work in progress:
 # Setup
 
 ```{=typst}
+#definition(title: "OLS estimator")[
+  The OLS estimator $hat(beta)$ minimizes $sum_i (Y_i - X_i^top beta)^2$.
+] <def-ols>
+
 #assumption(title: "Regularity")[
   The errors $epsilon_i$ are independent with mean zero and finite variance.
 ] <assm-regularity>
