@@ -1,6 +1,6 @@
 # bjk-academic
 
-An academic article template usable as both a standalone Typst template and a Quarto extension. Forked from [kazuyanagimoto/quarto-academic-typst](https://github.com/kazuyanagimoto/quarto-academic-typst).
+An academic article template — plus a matching course-syllabus offshoot — usable as both standalone Typst templates and Quarto extensions. Forked from [kazuyanagimoto/quarto-academic-typst](https://github.com/kazuyanagimoto/quarto-academic-typst).
 
 ## Usage
 
@@ -44,6 +44,92 @@ quarto install extension brentonk/bjk-typst
 
 Then use `format: academic-typst` in your `.qmd` front matter. See `template.qmd` for a minimal example.
 
+## Syllabus
+
+The same typographic identity is available as a course-syllabus template. It
+swaps the article masthead for a course title / course-meta block over an
+optional logistics grid (meetings, instructor, teaching assistants), drops the
+abstract / keywords / author grid / theorem machinery, and adds light
+schedule-table styling. Grading and the schedule are written as ordinary body
+sections.
+
+### Standalone Typst
+
+```typ
+#import "@local/bjk-academic:0.1.0": syllabus
+
+#show: syllabus.with(
+  title: "War and State Development",
+  number: "PSCI 2227",
+  institution: "Vanderbilt University",
+  semester: "Spring 2026",
+  instructor: "Professor Brenton Kenkel",
+  email: "brenton.kenkel@vanderbilt.edu",
+  time: [Mondays & Wednesdays, 2:20--3:45pm],
+  place: "Alumni Hall 201",
+  office-hours: [Tuesdays 2:00--3:30pm, Commons Center 326],
+  tas: (
+    (
+      name: "Seungho Song",
+      email: "seung.ho.song@vanderbilt.edu",
+      office-hours: [Fridays 3:00--4:30pm, Commons 317],
+    ),
+  ),
+)
+
+= Grading
+...
+```
+
+`syllabus()` parameters: `title`, `number`, `institution`, `semester`,
+`instructor`, `email`, `time`, `place`, `office-hours`, `tas`, `date`, `header`,
+`margin`, `paper`, `font`/`fontsize`/`sansfont`/`mathfont`, `link-color`,
+`sectionnumbering`, `toc`.
+
+- `number`, `institution`, and `semester` are joined with middots (in that
+  order, omitting any that are absent) into the course-meta line beneath the
+  title, and a hairline rule closes the masthead off from the body.
+- `time`/`place`, the instructor, and `tas` render as a compact key–value
+  logistics grid in the masthead (Meetings / Instructor / Teaching assistant
+  rows); rows with no content are omitted. `office-hours` is the instructor's,
+  shown on a muted line beneath their name; `tas` is an array of
+  `(name:, email:, office-hours:)` dictionaries (`email`/`office-hours` each
+  optional, shown the same way).
+- Pass values that contain dashes as **content** (`[2:20--3:45pm]`) rather than
+  strings (`"2:20--3:45pm"`) so Typst converts `--`/`---` to en/em dashes. (In
+  Quarto YAML this happens automatically.)
+
+See `template/example_syllabus.typ` for a complete working example.
+
+### Quarto
+
+Use `format: syllabus-typst`. The instructor comes from the first `author`
+entry's `name`/`email`; logistics are top-level keys:
+
+```yaml
+---
+title: "War and State Development"
+number: "PSCI 2227"
+institution: "Vanderbilt University"
+semester: "Spring 2026"
+author:
+  - name: Professor Brenton Kenkel
+    email: brenton.kenkel@vanderbilt.edu
+time: "Mondays & Wednesdays, 2:20--3:45pm"
+place: "Alumni Hall 201"
+office-hours: "Tuesdays 2:00--3:30pm, Commons Center 326"
+tas:
+  - name: Seungho Song
+    email: seung.ho.song@vanderbilt.edu
+    office-hours: "Fridays 3:00--4:30pm, Commons 317"
+format:
+  syllabus-typst:
+    font-paths: ["static/fonts"]
+---
+```
+
+See `syllabus.qmd` for a complete example.
+
 ## Setup
 
 ### Local Typst package
@@ -61,7 +147,7 @@ No special setup needed — `quarto install extension brentonk/bjk-typst` handle
 
 ## Editing the template
 
-All styling lives in a single file: `_extensions/academic/typst-template.typ`. This defines the `article()` and `appendix()` functions. Both the Typst package (`lib.typ`) and the Quarto extension (`typst-show.typ`) point to this same file, so aesthetic changes only need to be made once.
+The shared typographic identity lives in `_extensions/academic/styles.typ` (the `base-styles()` helper). Both `article()` (in `typst-template.typ`) and `syllabus()` (in `syllabus-template.typ`) apply it, so cross-cutting aesthetic changes only need to be made once. Edit the individual function files for masthead/front-matter changes specific to one document type.
 
 ### Key parameters
 
@@ -80,36 +166,48 @@ All styling lives in a single file: `_extensions/academic/typst-template.typ`. T
 
 ### Quarto-only files
 
-- `typst-show.typ` — maps Quarto YAML metadata to `article()` parameters (Mustache/Pandoc template syntax)
+- `typst-show.typ` — maps Quarto YAML metadata to the template function (Mustache/Pandoc template syntax)
 - `shortcodes.lua` — provides `{{< appendix >}}` shortcode
-- `_extension.yml` — Quarto extension metadata
+- `_extension.yml` — Quarto extension metadata; `format-resources` lists the auxiliary `.typ` files Quarto must copy next to the rendered output so the partials' imports resolve
 
 ## Building examples
 
 ```bash
-make          # build both examples
-make typst    # standalone Typst only
-make quarto   # Quarto only
-make clean    # remove generated PDFs
+make                 # build all four examples
+make typst           # standalone Typst article only
+make quarto          # Quarto article only
+make syllabus-typst  # standalone Typst syllabus only
+make syllabus-quarto # Quarto syllabus only
+make clean           # remove generated PDFs + copied resource artifacts
 ```
 
 ## Repo structure
 
 ```
 bjk-typst/
-├── lib.typ                          # Typst package entrypoint (re-exports from extension)
+├── lib.typ                          # Typst package entrypoint (re-exports article, appendix, syllabus, …)
 ├── typst.toml                       # Typst package manifest
 ├── Makefile                         # Build example PDFs
 ├── template/
-│   └── main.typ                     # Standalone Typst starter template
+│   ├── main.typ                     # Standalone Typst article starter
+│   ├── example_syllabus.typ         # Standalone Typst syllabus example
+│   └── syllabus-references.bib      # Bibliography for the syllabus example
 ├── _extensions/academic/
-│   ├── typst-template.typ           # Core template (single source of truth)
+│   ├── styles.typ                   # Shared base-styles() (single source of aesthetics)
+│   ├── typst-template.typ           # article() / appendix()
+│   ├── syllabus-template.typ        # syllabus()
+│   ├── macros.typ                   # Math/text/theorem macros
 │   ├── typst-show.typ               # Quarto YAML → article() bridge
 │   ├── shortcodes.lua               # Quarto shortcodes
-│   └── _extension.yml               # Quarto extension metadata
+│   └── _extension.yml               # academic-typst extension metadata
+├── _extensions/syllabus/
+│   ├── typst-template.typ           # Thin partial: imports syllabus()
+│   ├── typst-show.typ               # Quarto YAML → syllabus() bridge
+│   └── _extension.yml               # syllabus-typst extension metadata
 ├── static/fonts/                    # Bundled fonts (Fira Sans, Libertinus)
-├── template.qmd                     # Quarto example
-└── references.bib                   # Example bibliography
+├── template.qmd                     # Quarto article example
+├── syllabus.qmd                     # Quarto syllabus example
+└── references.bib                   # Example bibliography (article)
 ```
 
 ## Credits

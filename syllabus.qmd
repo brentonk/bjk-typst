@@ -1,0 +1,79 @@
+---
+title: "War and State Development"
+number: "PSCI 2227"
+institution: "Vanderbilt University"
+semester: "Spring 2026"
+author:
+  - name: Professor Brenton Kenkel
+    email: brenton.kenkel@vanderbilt.edu
+time: "Mondays & Wednesdays, 2:20--3:45pm"
+place: "Alumni Hall 201"
+office-hours: "Tuesdays 2:00--3:30pm, Commons Center 326"
+tas:
+  - name: Seungho Song
+    email: seung.ho.song@vanderbilt.edu
+    office-hours: "Fridays 3:00--4:30pm, Commons 317"
+bibliography: template/syllabus-references.bib
+format:
+  syllabus-typst:
+    font-paths: ["static/fonts"]
+---
+
+"War made the state, and the state made war."\
+---Charles Tilly, 1975
+
+In this course, we will examine how war has affected the development of major
+political and economic institutions. We will work through theoretical models of
+war's role in state development, and we will use historical and statistical
+evidence to evaluate the explanatory power of these models.
+
+The key logistics above come from the `time`, `place`, `office-hours`, and `tas`
+metadata. I try to respond to all student email within one business day, and you
+don't need an appointment for office hours --- just show up.
+
+# Grading
+
+**Daily reading quizzes (20%).**
+Each class session will begin with a brief quiz about the content of that day's
+readings. Your four lowest quiz scores, including any quizzes that you miss, will
+be dropped before calculating your final grade.
+
+**Exams (15% midterm, 20% final).**
+There will be an in-class midterm and final exam. Each exam will be evenly
+divided between short answer questions and a longer-format essay. The final exam
+will be cumulative.
+
+**Research project (5% proposal, 15% first draft, 25% final draft).**
+Outside of class, you will complete a research project that advances a
+theoretical argument about the effects of warfare on some aspect of state
+development, then uses historical evidence to test that argument.
+
+# Schedule
+
+All readings will be available on Brightspace. For each reading, I'll provide a
+reading guide with questions to help walk you through the reading.
+
+| Topic               | Date        | Reading                          |
+|---------------------|-------------|----------------------------------|
+| Intro to the course | Mon Jan 5   | No readings                      |
+| The sovereign state | Wed Jan 7   | @spruyt1994institutional         |
+|                     | Mon Jan 12  | @olson1993dictatorship           |
+|                     | Mon Jan 19  | *No class --- MLK Day*           |
+| Territorial control | Wed Jan 21  | @tilly1990coercion               |
+|                     | Mon Feb 2   | @abramson2017economic            |
+|                     | Wed Feb 4   | @thies2005war                    |
+| Raising revenue     | Mon Feb 16  | @levi1988rule                    |
+|                     | Fri Feb 20  | **Research proposal due**        |
+| Parliaments         | Wed Feb 25  | @kenkel2023theory                |
+|                     | Mon Mar 2   | **Midterm exam**                 |
+| Democratization     | Mon Mar 16  | @acemoglu2000did                 |
+|                     | Fri Mar 20  | **First draft due**              |
+| Nationalism         | Wed Mar 25  | @anderson1983imagined            |
+| Bureaucracy         | Mon Apr 13  | @brewer1988sinews                |
+|                     | Fri Apr 17  | **Final paper due**              |
+|                     | Thur Apr 23 | **Final exam**                   |
+
+# References
+
+::: {#refs}
+:::
