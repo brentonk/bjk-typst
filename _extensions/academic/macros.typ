@@ -35,7 +35,9 @@
   highlight(fill: note-color)[\[#it\]]
 }
 #let paragraph(title) = {
-  v(0.5em)
+  // No explicit vertical space: a run-in lead-in is always its own paragraph,
+  // so the normal paragraph/heading spacing already separates it. Adding space
+  // here would stack on top of that and over-pad section-opening lead-ins.
   text(font: "Fira Sans", strong(title))
   h(0.5em)
 }
