@@ -16,6 +16,8 @@ Each type has both usage paths:
 - **Typst path:** `lib.typ` re-exports `article`, `appendix`, `syllabus`, … → standalone `.typ` files import `@local/bjk-academic:0.1.0`
 - **Quarto path:** each format directory's `typst-show.typ` maps YAML metadata to the relevant function using Mustache syntax. `_extensions/academic/` contributes `academic-typst`; `_extensions/syllabus/` contributes `syllabus-typst`.
 
+In Quarto documents, write run-in paragraph lead-ins as `[Lead-in.]{.paragraph}` spans. The `paragraph.lua` filter (auto-applied in both Typst formats) converts them to the `paragraph()` macro from `macros.typ` (Fira Sans bold run-in); in any other format they degrade to plain bold, keeping documents portable to HTML/gfm. To get the bold fallback when rendering a non-Typst format, add `filters: [academic]` to the document YAML (the academic extension also contributes the filter standalone).
+
 The Quarto formats declare their auxiliary `.typ` files (`macros.typ`, `styles.typ`, `syllabus-template.typ`) under `format-resources` in `_extension.yml` so Typst can resolve the partials' imports — Quarto copies them next to the rendered output (and into the repo root during local builds; `make` and `.gitignore` handle the cleanup). The syllabus Quarto extension is thin: its `typst-template.typ` partial just imports `syllabus()` from the shared `syllabus-template.typ`.
 
 ## Key files
@@ -24,6 +26,7 @@ The Quarto formats declare their auxiliary `.typ` files (`macros.typ`, `styles.t
 - `_extensions/academic/typst-template.typ` — `article()`/`appendix()`
 - `_extensions/academic/syllabus-template.typ` — `syllabus()`
 - `_extensions/academic/macros.typ` — math/text/theorem macros
+- `_extensions/academic/paragraph.lua` — `[...]{.paragraph}` span → `paragraph()` (Typst) / bold (other formats)
 - `_extensions/academic/typst-show.typ` — Quarto YAML→`article()` bridge (Mustache, not pure Typst)
 - `_extensions/syllabus/{_extension.yml,typst-template.typ,typst-show.typ}` — Quarto `syllabus-typst` format
 - `_extensions/academic/shortcodes.lua` — Quarto `{{< appendix >}}` shortcode
