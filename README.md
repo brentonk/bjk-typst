@@ -147,7 +147,7 @@ No special setup needed — `quarto install extension brentonk/bjk-typst` handle
 
 ## Editing the template
 
-The shared typographic identity lives in `_extensions/academic/styles.typ` (the `base-styles()` helper). Both `article()` (in `typst-template.typ`) and `syllabus()` (in `syllabus-template.typ`) apply it, so cross-cutting aesthetic changes only need to be made once. Edit the individual function files for masthead/front-matter changes specific to one document type.
+The shared typographic identity lives in `_extensions/academic/styles.typ` (the `base-styles()` helper). Both `article()` (in `article-template.typ`) and `syllabus()` (in `syllabus-template.typ`) apply it, so cross-cutting aesthetic changes only need to be made once. Edit the individual function files for masthead/front-matter changes specific to one document type.
 
 ### Key parameters
 
@@ -167,8 +167,9 @@ The shared typographic identity lives in `_extensions/academic/styles.typ` (the 
 ### Quarto-only files
 
 - `typst-show.typ` — maps Quarto YAML metadata to the template function (Mustache/Pandoc template syntax)
+- `typst-template.typ` — thin template partial that imports the implementation from `_extensions/academic/`; assumes the rendered document lives at the project root, alongside `_extensions/`
 - `shortcodes.lua` — provides `{{< appendix >}}` shortcode
-- `_extension.yml` — Quarto extension metadata; `format-resources` lists the auxiliary `.typ` files Quarto must copy next to the rendered output so the partials' imports resolve
+- `_extension.yml` — Quarto extension metadata
 
 ## Building examples
 
@@ -178,7 +179,7 @@ make typst           # standalone Typst article only
 make quarto          # Quarto article only
 make syllabus-typst  # standalone Typst syllabus only
 make syllabus-quarto # Quarto syllabus only
-make clean           # remove generated PDFs + copied resource artifacts
+make clean           # remove generated PDFs
 ```
 
 ## Repo structure
@@ -194,9 +195,10 @@ bjk-typst/
 │   └── syllabus-references.bib      # Bibliography for the syllabus example
 ├── _extensions/academic/
 │   ├── styles.typ                   # Shared base-styles() (single source of aesthetics)
-│   ├── typst-template.typ           # article() / appendix()
+│   ├── article-template.typ         # article() / appendix()
 │   ├── syllabus-template.typ        # syllabus()
 │   ├── macros.typ                   # Math/text/theorem macros
+│   ├── typst-template.typ           # Thin partial: imports article() / appendix()
 │   ├── typst-show.typ               # Quarto YAML → article() bridge
 │   ├── shortcodes.lua               # Quarto shortcodes
 │   └── _extension.yml               # academic-typst extension metadata

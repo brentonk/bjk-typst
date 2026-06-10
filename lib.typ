@@ -1,5 +1,5 @@
 #import "_extensions/academic/syllabus-template.typ": syllabus
-#import "_extensions/academic/typst-template.typ": (
+#import "_extensions/academic/article-template.typ": (
   article, appendix,
   lemma, proposition, corollary, assumption, definition,
   proof, qedhere, theorion-restate, set-theorion-numbering,

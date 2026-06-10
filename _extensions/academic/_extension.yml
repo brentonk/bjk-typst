@@ -14,6 +14,3 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
-      format-resources:
-        - macros.typ
-        - styles.typ

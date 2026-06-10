@@ -10,7 +10,3 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
-      format-resources:
-        - ../academic/syllabus-template.typ
-        - ../academic/styles.typ
-        - ../academic/macros.typ

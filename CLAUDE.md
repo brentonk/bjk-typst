@@ -8,7 +8,7 @@ The shared typographic identity (fonts, paragraph/heading styling, links, figure
 
 Two document types build on it:
 
-- **Article** — `article()`/`appendix()` in `_extensions/academic/typst-template.typ`.
+- **Article** — `article()`/`appendix()` in `_extensions/academic/article-template.typ`.
 - **Syllabus** — `syllabus()` in `_extensions/academic/syllabus-template.typ`. Same identity as the article, but with a course title / number / institution / semester / instructor masthead (the `number`/`institution`/`semester` fields compose the course-meta line beneath the title, closed off by a hairline rule; no abstract/keywords/author-grid/theorems) and light schedule-table styling. Optional logistics metadata renders as a compact key–value grid in the masthead with symmetric Meetings / Instructor / Teaching assistant rows: `time`/`place` form the Meetings row, the instructor and each of `tas` get a name + email row with their office hours on a muted second line. `office-hours` is the instructor's; `tas` is an array of `(name:, email:, office-hours:)` dicts. Grading and the schedule are written as ordinary body sections. Values with dashes should be passed as content (`[2:20--3:45pm]`) so Typst converts them; the Quarto bridge wraps values in `[...]` automatically.
 
 Each type has both usage paths:
@@ -18,15 +18,16 @@ Each type has both usage paths:
 
 In Quarto documents, write run-in paragraph lead-ins as `[Lead-in.]{.paragraph}` spans. The `paragraph.lua` filter (auto-applied in both Typst formats) converts them to the `paragraph()` macro from `macros.typ` (Fira Sans bold run-in); in any other format they degrade to plain bold, keeping documents portable to HTML/gfm. To get the bold fallback when rendering a non-Typst format, add `filters: [academic]` to the document YAML (the academic extension also contributes the filter standalone).
 
-The Quarto formats declare their auxiliary `.typ` files (`macros.typ`, `styles.typ`, `syllabus-template.typ`) under `format-resources` in `_extension.yml` so Typst can resolve the partials' imports — Quarto copies them next to the rendered output (and into the repo root during local builds; `make` and `.gitignore` handle the cleanup). The syllabus Quarto extension is thin: its `typst-template.typ` partial just imports `syllabus()` from the shared `syllabus-template.typ`.
+Each format's `typst-template.typ` is a thin partial that imports the implementation via a `_extensions/academic/...` path. Because partials are spliced into the intermediate `.typ` next to the rendered document, those imports resolve relative to the document's directory — so Quarto documents using these formats must live at the project root, alongside `_extensions/`. (This replaced an earlier `format-resources` approach, which littered the document directory with copies of `macros.typ`/`styles.typ`/`syllabus-template.typ` after every render.)
 
 ## Key files
 
 - `_extensions/academic/styles.typ` — shared `base-styles()`; edit this for cross-cutting aesthetic changes
-- `_extensions/academic/typst-template.typ` — `article()`/`appendix()`
+- `_extensions/academic/article-template.typ` — `article()`/`appendix()`
 - `_extensions/academic/syllabus-template.typ` — `syllabus()`
 - `_extensions/academic/macros.typ` — math/text/theorem macros
 - `_extensions/academic/paragraph.lua` — `[...]{.paragraph}` span → `paragraph()` (Typst) / bold (other formats)
+- `_extensions/academic/typst-template.typ` — thin Quarto partial; wildcard-imports `article-template.typ`
 - `_extensions/academic/typst-show.typ` — Quarto YAML→`article()` bridge (Mustache, not pure Typst)
 - `_extensions/syllabus/{_extension.yml,typst-template.typ,typst-show.typ}` — Quarto `syllabus-typst` format
 - `_extensions/academic/shortcodes.lua` — Quarto `{{< appendix >}}` shortcode

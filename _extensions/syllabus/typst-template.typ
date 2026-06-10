@@ -3,10 +3,10 @@
 // The syllabus aesthetics live in the shared academic extension (single source
 // of truth). This thin partial just pulls `syllabus()` into scope so the
 // companion `typst-show.typ` can invoke it, plus `paragraph()` so the
-// paragraph.lua filter's output resolves. The shared files
-// (`syllabus-template.typ`, `styles.typ`, `macros.typ`) are copied next to the
-// rendered output via this extension's `format-resources`, so the bare imports
-// resolve.
+// paragraph.lua filter's output resolves. It is spliced into the intermediate
+// .typ next to the rendered document, so the imports are relative to the
+// document's directory: they assume the document lives at the project root,
+// alongside `_extensions/`.
 
-#import "syllabus-template.typ": syllabus
-#import "macros.typ": paragraph
+#import "_extensions/academic/syllabus-template.typ": syllabus
+#import "_extensions/academic/macros.typ": paragraph

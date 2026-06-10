@@ -3,10 +3,6 @@
 template.typ
 template-full.typ
 /syllabus.typ
-# Auxiliary .typ files Quarto copies to the repo root via format-resources
-/macros.typ
-/styles.typ
-/syllabus-template.typ
 *_files/
 .Rproj.user
 .Rhistory
