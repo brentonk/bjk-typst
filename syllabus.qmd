@@ -72,8 +72,3 @@ reading guide with questions to help walk you through the reading.
 | Bureaucracy         | Mon Apr 13  | @brewer1988sinews                |
 |                     | Fri Apr 17  | **Final paper due**              |
 |                     | Thur Apr 23 | **Final exam**                   |
-
-# References
-
-::: {#refs}
-:::
