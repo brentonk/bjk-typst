@@ -86,6 +86,22 @@
     align: left + top,
   )
   show table.cell.where(y: 0): set text(font: sansfont, weight: "bold", size: 0.9em)
+  // Booktabs-style bottom rule. The stroke function above can't know which
+  // row is last, so append a closing hline instead — unless the table already
+  // ends with one, which also terminates this show rule's recursion. The set
+  // rule keeps all hlines (including the header rule Pandoc emits in Quarto
+  // tables) at the same weight as the top rule.
+  set table.hline(stroke: 0.7pt + black)
+  show table: it => {
+    let kids = it.children
+    if kids.len() == 0 or kids.last().func() == table.hline {
+      it
+    } else {
+      let fields = it.fields()
+      let _ = fields.remove("children")
+      table(..fields, ..kids, table.hline())
+    }
+  }
 
   // Masthead
   if date != none or header != none {
