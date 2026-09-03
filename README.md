@@ -1,6 +1,6 @@
 # bjk-academic
 
-An academic article template — plus a matching course-syllabus offshoot — usable as both standalone Typst templates and Quarto extensions. Forked from [kazuyanagimoto/quarto-academic-typst](https://github.com/kazuyanagimoto/quarto-academic-typst).
+An academic article template — plus matching course-syllabus and simple-document (memo / referee report) offshoots — usable as both standalone Typst templates and Quarto extensions. Forked from [kazuyanagimoto/quarto-academic-typst](https://github.com/kazuyanagimoto/quarto-academic-typst).
 
 ## Usage
 
@@ -130,6 +130,62 @@ format:
 
 See `syllabus.qmd` for a complete example.
 
+## Simple documents
+
+For referee reports, memos, and other quick documents, `simple()` applies the
+same typographic identity with none of the article's masthead machinery: no
+author grid, abstract, keywords, thanks, or title page. It optionally renders a
+modest title (bold Fira Sans, only slightly larger than a level-1 heading) with
+a small author/date line above it, and otherwise starts the body at the top of
+the page. The math/text/theorem macros are available exactly as in the article.
+
+### Standalone Typst
+
+```typ
+#import "@local/bjk-academic:0.1.0": simple
+
+#show: simple.with(
+  title: "Referee Report: Manuscript 1234",
+  author: "Reviewer 2",
+  date: "September 2026",
+)
+
+= Summary
+...
+```
+
+`simple()` parameters: `title`, `author`, `date`, `title-meta`, `author-meta`,
+`margin`, `paper`, `font`/`fontsize`/`sansfont`/`mathfont`, `link-color`,
+`sectionnumbering`, `pagenumbering`, `toc`.
+
+- `title`, `author`, and `date` are all optional and default to `none`; unlike
+  the article, no date is printed unless you pass one. `#show: simple` with no
+  arguments gives a bare styled document.
+- The PDF metadata falls back to `title` and `author` when `title-meta` /
+  `author-meta` are not given. `document(author:)` only accepts strings, so
+  pass `author-meta` explicitly if `author` is content.
+
+See `template/example_simple.typ` for a complete working example.
+
+### Quarto
+
+Use `format: simple-typst`. `title`, `author`, and `date` map straight
+through; multiple authors are joined with commas on the author line:
+
+```yaml
+---
+title: "Referee Report: Manuscript 1234"
+author: "Reviewer 2"
+date: today
+date-format: long
+format:
+  simple-typst:
+    font-paths: ["static/fonts"]
+---
+```
+
+See `simple.qmd` for a complete example.
+
 ## Setup
 
 ### Local Typst package
@@ -147,7 +203,7 @@ No special setup needed — `quarto install extension brentonk/bjk-typst` handle
 
 ## Editing the template
 
-The shared typographic identity lives in `_extensions/academic/styles.typ` (the `base-styles()` helper). Both `article()` (in `article-template.typ`) and `syllabus()` (in `syllabus-template.typ`) apply it, so cross-cutting aesthetic changes only need to be made once. Edit the individual function files for masthead/front-matter changes specific to one document type.
+The shared typographic identity lives in `_extensions/academic/styles.typ` (the `base-styles()` helper). `article()` (in `article-template.typ`), `syllabus()` (in `syllabus-template.typ`), and `simple()` (in `simple-template.typ`) all apply it, so cross-cutting aesthetic changes only need to be made once. Edit the individual function files for masthead/front-matter changes specific to one document type.
 
 ### Key parameters
 
@@ -155,8 +211,8 @@ The shared typographic identity lives in `_extensions/academic/styles.typ` (the 
 |-----------|---------|-------------|
 | `font` | `"libertinus serif"` | Body font |
 | `sansfont` | `"Fira Sans"` | Heading/UI font |
-| `mathfont` | `"New Computer Modern Math"` | Math font |
-| `fontsize` | `11pt` | Base font size |
+| `mathfont` | `"Libertinus Math"` | Math font |
+| `fontsize` | `12pt` | Base font size |
 | `link-color` | `rgb("#483d8b")` | Link/reference color |
 | `margin` | `(x: 1.25in, y: 1.25in)` | Page margins |
 | `paper` | `"us-letter"` | Paper size |
@@ -174,11 +230,13 @@ The shared typographic identity lives in `_extensions/academic/styles.typ` (the 
 ## Building examples
 
 ```bash
-make                 # build all four examples
+make                 # build all six examples
 make typst           # standalone Typst article only
 make quarto          # Quarto article only
 make syllabus-typst  # standalone Typst syllabus only
 make syllabus-quarto # Quarto syllabus only
+make simple-typst    # standalone Typst simple document only
+make simple-quarto   # Quarto simple document only
 make clean           # remove generated PDFs
 ```
 
@@ -186,17 +244,19 @@ make clean           # remove generated PDFs
 
 ```
 bjk-typst/
-├── lib.typ                          # Typst package entrypoint (re-exports article, appendix, syllabus, …)
+├── lib.typ                          # Typst package entrypoint (re-exports article, appendix, syllabus, simple, …)
 ├── typst.toml                       # Typst package manifest
 ├── Makefile                         # Build example PDFs
 ├── template/
 │   ├── main.typ                     # Standalone Typst article starter
 │   ├── example_syllabus.typ         # Standalone Typst syllabus example
+│   ├── example_simple.typ           # Standalone Typst simple-document example
 │   └── syllabus-references.bib      # Bibliography for the syllabus example
 ├── _extensions/academic/
 │   ├── styles.typ                   # Shared base-styles() (single source of aesthetics)
 │   ├── article-template.typ         # article() / appendix()
 │   ├── syllabus-template.typ        # syllabus()
+│   ├── simple-template.typ          # simple()
 │   ├── macros.typ                   # Math/text/theorem macros
 │   ├── typst-template.typ           # Thin partial: imports article() / appendix()
 │   ├── typst-show.typ               # Quarto YAML → article() bridge
@@ -206,9 +266,14 @@ bjk-typst/
 │   ├── typst-template.typ           # Thin partial: imports syllabus()
 │   ├── typst-show.typ               # Quarto YAML → syllabus() bridge
 │   └── _extension.yml               # syllabus-typst extension metadata
+├── _extensions/simple/
+│   ├── typst-template.typ           # Thin partial: imports simple() + macros
+│   ├── typst-show.typ               # Quarto YAML → simple() bridge
+│   └── _extension.yml               # simple-typst extension metadata
 ├── static/fonts/                    # Bundled fonts (Fira Sans, Libertinus)
 ├── template.qmd                     # Quarto article example
 ├── syllabus.qmd                     # Quarto syllabus example
+├── simple.qmd                       # Quarto simple-document example
 └── references.bib                   # Example bibliography (article)
 ```
 

@@ -2,9 +2,10 @@
 //
 // `base-styles` bundles the set/show rules that define the common typographic
 // identity (fonts, paragraph, headings, links, figure captions, references,
-// bibliography). Both `article()` (typst-template.typ) and `syllabus()`
-// (syllabus.typ) apply it via `show: base-styles.with(...)`, so aesthetic
-// changes only need to be made once.
+// bibliography). `article()` (article-template.typ), `syllabus()`
+// (syllabus-template.typ), and `simple()` (simple-template.typ) all apply it
+// via `show: base-styles.with(...)`, so aesthetic changes only need to be made
+// once.
 
 #import "macros.typ": *
 

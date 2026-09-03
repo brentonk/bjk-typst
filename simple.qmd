@@ -1,0 +1,36 @@
+---
+title: "TODO(BJK): title"
+author: "TODO(BJK): author"
+date: today
+date-format: long
+format:
+  simple-typst:
+    font-paths: ["static/fonts"]
+---
+
+`#lorem(80)`{=typst}
+
+# TODO(BJK): first heading
+
+[TODO(BJK): lead-in.]{.paragraph} `#lorem(60)`{=typst}
+
+$$
+y = \beta_0 + \beta_1 x + \varepsilon
+$$ {#eq-example}
+
+`#lorem(30)`{=typst} See @eq-example.
+
+```{=typst}
+#proposition[
+  #lorem(20)
+]
+#proof[
+  #lorem(25)
+]
+```
+
+# TODO(BJK): second heading
+
+1. `#lorem(20)`{=typst}
+2. `#lorem(20)`{=typst}
+3. `#lorem(20)`{=typst}

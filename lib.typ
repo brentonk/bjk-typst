@@ -1,4 +1,5 @@
 #import "_extensions/academic/syllabus-template.typ": syllabus
+#import "_extensions/academic/simple-template.typ": simple
 #import "_extensions/academic/article-template.typ": (
   article, appendix,
   lemma, proposition, corollary, assumption, definition,
