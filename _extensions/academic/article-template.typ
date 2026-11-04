@@ -151,7 +151,9 @@
   }
 
   if toc {
-    block(above: 0em, below: 2em)[
+    // The abstract block's inset already separates it from the TOC; without
+    // an abstract, the TOC needs its own gap below the author grid.
+    block(above: if abstract != none { 0em } else { 2em }, below: 2em)[
       #outline(
         title: auto,
         depth: none,
