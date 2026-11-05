@@ -34,3 +34,14 @@ $$ {#eq-example}
 1. `#lorem(20)`{=typst}
 2. `#lorem(20)`{=typst}
 3. `#lorem(20)`{=typst}
+
+<!--
+Paragraphs are LaTeX-style: indented, with no gap between them. Typst indents
+only a paragraph that directly follows another paragraph, so a new paragraph
+right after a list or display equation starts flush left. When it begins a new
+thought, start it with the indent shortcode (as below). Leave text that
+continues a sentence after an equation ("where ...") flush left, and don't use
+the shortcode after an ordinary paragraph (Typst already indents those).
+-->
+
+{{< indent >}} `#lorem(30)`{=typst}

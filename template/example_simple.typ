@@ -9,7 +9,7 @@
 // ~/.local/share/typst/packages/local/bjk-academic/0.1.0/):
 //   #import "@local/bjk-academic:0.1.0": simple
 
-#import "../lib.typ": simple, paragraph, proposition, proof
+#import "../lib.typ": simple, paragraph, proposition, proof, indent
 
 // All three metadata fields are optional; omit them for a bare document.
 #show: simple.with(
@@ -41,3 +41,11 @@ $ y = beta_0 + beta_1 x + epsilon $ <eq-example>
 + #lorem(20)
 + #lorem(20)
 + #lorem(20)
+
+// Paragraphs are LaTeX-style: indented, with no gap between them. Typst
+// indents only a paragraph that directly follows another paragraph, so a new
+// paragraph right after a list or display equation starts flush left. When it
+// begins a new thought, start it with `#indent`. Leave text that continues a
+// sentence after an equation ("where ...") flush left, and don't use `#indent`
+// after an ordinary paragraph (Typst already indents those, so it doubles).
+#indent #lorem(30)

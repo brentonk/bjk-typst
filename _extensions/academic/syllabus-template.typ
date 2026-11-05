@@ -72,6 +72,7 @@
     mathfont: mathfont,
     link-color: link-color,
     sectionnumbering: sectionnumbering,
+    indent: false,
   )
 
   // Tighter line spacing than the article — a syllabus is a denser reference

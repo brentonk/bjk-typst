@@ -4,7 +4,7 @@ Academic article + course-syllabus + simple-document (memo / referee report) tem
 
 ## Architecture
 
-The shared typographic identity (fonts, paragraph/heading styling, links, figure captions, references, bibliography) lives in `_extensions/academic/styles.typ` as `base-styles()`. All document types apply it via `show: base-styles.with(...)`, so aesthetic changes only need to be made once. `base-styles()` contains no page setup or masthead; each document function supplies its own `set page` and front matter.
+The shared typographic identity (fonts, paragraph/heading styling, links, figure captions, references, bibliography) lives in `_extensions/academic/styles.typ` as `base-styles()`. All document types apply it via `show: base-styles.with(...)`, so aesthetic changes only need to be made once. `base-styles()` takes `indent: true` (LaTeX-style paragraphs: 1.5em first-line indent, paragraph spacing equal to the leading, extra space above/below lists); the syllabus passes `indent: false` to keep block paragraphs. `base-styles()` contains no page setup or masthead; each document function supplies its own `set page` and front matter.
 
 Three document types build on it:
 
@@ -16,6 +16,8 @@ Each type has both usage paths:
 
 - **Typst path:** `lib.typ` re-exports `article`, `appendix`, `syllabus`, `simple`, … → standalone `.typ` files import `@local/bjk-academic:0.1.0`
 - **Quarto path:** each format directory's `typst-show.typ` maps YAML metadata to the relevant function using Mustache syntax. `_extensions/academic/` contributes `academic-typst`; `_extensions/syllabus/` contributes `syllabus-typst`; `_extensions/simple/` contributes `simple-typst`.
+
+Typst indents only a paragraph that directly follows another paragraph, so a new paragraph right after a list or display equation is flush left; it can't be distinguished from text continuing a sentence after an equation. `#indent` (in `macros.typ`, exported from `lib.typ`) adds a manual indent matching `par.first-line-indent`; Quarto documents use the `{{< indent >}}` shortcode (`shortcodes.lua`, registered for the academic and simple formats and at the academic extension's top level so it emits nothing in other formats). The examples demonstrate it after a list. Paragraphs after theorem boxes are indented automatically: a `show figure` rule in `base-styles()` appends an invisible zero-height paragraph (with its spacing cancelled; a copy of theorion's `indent-fakepar`) after each theorion frame figure. That rule must come after `show: show-theorion`, whose own figure rule replaces the figure with its body. `base-styles()` also calls `set-indent-mode(none)`: theorion's default mode puts a similar invisible paragraph *inside* each box, which does nothing useful and, when a box ends right at the bottom of a page, gets pushed to the next page as an empty strip of box colour.
 
 In Quarto documents, write run-in paragraph lead-ins as `[Lead-in.]{.paragraph}` spans. The `paragraph.lua` filter (auto-applied in all three Typst formats) converts them to the `paragraph()` macro from `macros.typ` (Fira Sans bold run-in); in any other format they degrade to plain bold, keeping documents portable to HTML/gfm. To get the bold fallback when rendering a non-Typst format, add `filters: [academic]` to the document YAML (the academic extension also contributes the filter standalone).
 
@@ -33,7 +35,7 @@ Each format's `typst-template.typ` is a thin partial that imports the implementa
 - `_extensions/academic/typst-show.typ` — Quarto YAML→`article()` bridge (Mustache, not pure Typst)
 - `_extensions/syllabus/{_extension.yml,typst-template.typ,typst-show.typ}` — Quarto `syllabus-typst` format
 - `_extensions/simple/{_extension.yml,typst-template.typ,typst-show.typ}` — Quarto `simple-typst` format
-- `_extensions/academic/shortcodes.lua` — Quarto `{{< appendix >}}` shortcode
+- `_extensions/academic/shortcodes.lua` — Quarto `{{< appendix >}}` and `{{< indent >}}` shortcodes
 - `lib.typ` — one-line re-exports for standalone Typst usage
 - `typst.toml` — Typst package manifest
 - `template/main.typ` — standalone article starter; `template/example_syllabus.typ` — standalone syllabus example; `template/example_simple.typ` — standalone simple-document example (placeholder content)

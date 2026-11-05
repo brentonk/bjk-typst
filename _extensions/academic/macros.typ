@@ -34,6 +34,17 @@
   )
   highlight(fill: note-color)[\[#it\]]
 }
+// Manual first-line indent, for a new paragraph that Typst leaves flush left.
+// Typst indents a paragraph only when it directly follows another paragraph,
+// so a new paragraph right after a display equation, list, or figure starts
+// flush left. (Paragraphs after theorem boxes are indented automatically; see
+// styles.typ.) Put `#indent` at the start of such a paragraph when it
+// begins a new thought (in Quarto: `{{< indent >}}`). Do not use it for text
+// that continues a sentence after an equation ("where x is ..."), which should
+// stay flush left. The amount matches the current paragraph indent, so it is a
+// no-op in documents without one (e.g. the syllabus).
+#let indent = context h(par.first-line-indent.amount)
+
 #let paragraph(title) = {
   // No explicit vertical space: a run-in lead-in is always its own paragraph,
   // so the normal paragraph/heading spacing already separates it. Adding space

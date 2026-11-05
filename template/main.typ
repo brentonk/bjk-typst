@@ -12,7 +12,7 @@
   lemma, proposition, corollary, assumption, definition,
   proof, qedhere, theorion-restate, set-theorion-numbering,
   deriv, pderiv, mathbf, moveeqleft, indicator,
-  def, note, paragraph, citet,
+  def, note, paragraph, citet, indent,
 )
 
 #show: article.with(
@@ -96,6 +96,17 @@ vector.
 
 #paragraph[Discussion.]
 #lorem(40)
+
+// Paragraphs are LaTeX-style: indented, with no gap between them. Typst
+// indents only a paragraph that directly follows another paragraph, so a new
+// paragraph right after a list or display equation starts flush left. When it
+// begins a new thought, start it with `#indent`. Leave text that continues a
+// sentence after an equation ("where ...") flush left, and don't use `#indent`
+// after an ordinary paragraph (Typst already indents those, so it doubles).
+- #lorem(10)
+- #lorem(10)
+
+#indent #lorem(40)
 
 #bibliography("/references.bib")
 

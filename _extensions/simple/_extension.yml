@@ -7,6 +7,8 @@ contributes:
     typst:
       filters:
         - ../academic/paragraph.lua
+      shortcodes:
+        - ../academic/shortcodes.lua
       template-partials:
         - typst-template.typ
         - typst-show.typ

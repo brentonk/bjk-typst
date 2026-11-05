@@ -186,6 +186,44 @@ format:
 
 See `simple.qmd` for a complete example.
 
+## Paragraphs and manual indents
+
+Articles and simple documents use LaTeX-style paragraphs: a 1.5em first-line
+indent and no extra space between paragraphs. Lists get a little space above
+and below so they stand apart from the text around them. The syllabus keeps
+block paragraphs (a gap between paragraphs, no indent).
+
+Typst indents a paragraph only when it directly follows another paragraph. So
+a paragraph that comes right after a heading, display equation, list, or
+figure starts flush left. That is what you want after a heading or figure, and
+for text that continues a sentence after an equation ("…where $x$ is…"). But a
+new paragraph right after a list or equation also starts flush left, which can
+make it look like a continuation. Unlike LaTeX, Typst can't tell the two apart
+by a blank line in the source.
+
+The paragraph after a theorem box (lemma, proposition, definition, …) is
+indented automatically, since text after a theorem almost always starts a new
+paragraph. A proof that follows a theorem stays flush left.
+
+For those cases, start the paragraph with a manual indent:
+
+```typ
+- First case.
+- Second case.
+
+#indent Finally, the remaining case …
+```
+
+In Quarto, use the shortcode (it emits nothing in non-Typst formats):
+
+```markdown
+{{< indent >}} Finally, the remaining case …
+```
+
+Use it only where the paragraph would otherwise be flush left. After an
+ordinary paragraph Typst already indents, so `#indent` there doubles the
+indent.
+
 ## Setup
 
 ### Local Typst package
@@ -224,7 +262,7 @@ The shared typographic identity lives in `_extensions/academic/styles.typ` (the 
 
 - `typst-show.typ` — maps Quarto YAML metadata to the template function (Mustache/Pandoc template syntax)
 - `typst-template.typ` — thin template partial that imports the implementation from `_extensions/academic/`; assumes the rendered document lives at the project root, alongside `_extensions/`
-- `shortcodes.lua` — provides `{{< appendix >}}` shortcode
+- `shortcodes.lua` — provides the `{{< appendix >}}` and `{{< indent >}}` shortcodes
 - `_extension.yml` — Quarto extension metadata
 
 ## Building examples

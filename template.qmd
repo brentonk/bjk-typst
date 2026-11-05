@@ -87,6 +87,20 @@ is `#pderiv($Y$, $X_i$)`. Both render with the standard fraction style:
 $ deriv(Y, X) quad pderiv(Y, X_i) $
 ```
 
+<!--
+Paragraphs are LaTeX-style: indented, with no gap between them. Typst indents
+only a paragraph that directly follows another paragraph, so a new paragraph
+right after a list or display equation starts flush left. When it begins a new
+thought, start it with the indent shortcode (as below). Leave text that
+continues a sentence after an equation ("where ...") flush left, and don't use
+the shortcode after an ordinary paragraph (Typst already indents those).
+-->
+
+- `#lorem(10)`{=typst}
+- `#lorem(10)`{=typst}
+
+{{< indent >}} `#lorem(40)`{=typst}
+
 # Analysis
 
 We fit a simple linear model of fuel efficiency on vehicle weight using the `mtcars` dataset, following @horst2020 and others [@katsushika1831].
