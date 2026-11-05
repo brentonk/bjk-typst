@@ -212,7 +212,7 @@ The shared typographic identity lives in `_extensions/academic/styles.typ` (the 
 | `font` | `"libertinus serif"` | Body font |
 | `sansfont` | `"Fira Sans"` | Heading/UI font |
 | `mathfont` | `"Libertinus Math"` | Math font |
-| `fontsize` | `12pt` | Base font size |
+| `fontsize` | `11pt` | Base font size |
 | `link-color` | `rgb("#483d8b")` | Link/reference color |
 | `margin` | `(x: 1.25in, y: 1.25in)` | Page margins |
 | `paper` | `"us-letter"` | Paper size |

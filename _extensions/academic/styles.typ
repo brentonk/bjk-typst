@@ -13,7 +13,7 @@
   lang: "en",
   region: "US",
   font: "libertinus serif",
-  fontsize: 12pt,
+  fontsize: 11pt,
   sansfont: "Fira Sans",
   mathfont: "Libertinus Math",
   link-color: rgb("#483d8b"),
