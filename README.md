@@ -190,7 +190,8 @@ See `simple.qmd` for a complete example.
 
 Articles and simple documents use LaTeX-style paragraphs: a 1.5em first-line
 indent and no extra space between paragraphs. Lists get a little space above
-and below so they stand apart from the text around them. The syllabus keeps
+and below so they stand apart from the text around them, and their bullets and
+numbers are indented to line up with a paragraph's first line. The syllabus keeps
 block paragraphs (a gap between paragraphs, no indent).
 
 Typst indents a paragraph only when it directly follows another paragraph. So

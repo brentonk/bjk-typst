@@ -4,7 +4,7 @@ Academic article + course-syllabus + simple-document (memo / referee report) tem
 
 ## Architecture
 
-The shared typographic identity (fonts, paragraph/heading styling, links, figure captions, references, bibliography) lives in `_extensions/academic/styles.typ` as `base-styles()`. All document types apply it via `show: base-styles.with(...)`, so aesthetic changes only need to be made once. `base-styles()` takes `indent: true` (LaTeX-style paragraphs: 1.5em first-line indent, paragraph spacing equal to the leading, extra space above/below lists); the syllabus passes `indent: false` to keep block paragraphs. `base-styles()` contains no page setup or masthead; each document function supplies its own `set page` and front matter.
+The shared typographic identity (fonts, paragraph/heading styling, links, figure captions, references, bibliography) lives in `_extensions/academic/styles.typ` as `base-styles()`. All document types apply it via `show: base-styles.with(...)`, so aesthetic changes only need to be made once. `base-styles()` takes `indent: true` (LaTeX-style paragraphs: 1.5em first-line indent, paragraph spacing equal to the leading, extra space above/below lists, list/enum markers indented 1.5em to line up with the paragraph indent); the syllabus passes `indent: false` to keep block paragraphs. `base-styles()` contains no page setup or masthead; each document function supplies its own `set page` and front matter.
 
 Three document types build on it:
 

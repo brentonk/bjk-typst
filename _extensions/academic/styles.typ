@@ -42,6 +42,10 @@
   show list: set par(spacing: 1.25em) if indent
   show enum: set par(spacing: 1.25em) if indent
   show terms: set par(spacing: 1.25em) if indent
+  // Indent list markers by the paragraph indent, so a bullet lines up with the
+  // first line of an indented paragraph instead of jutting out to its left.
+  set list(indent: 1.5em) if indent
+  set enum(indent: 1.5em) if indent
   set text(
     lang: lang,
     region: region,
